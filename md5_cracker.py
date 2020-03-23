@@ -11,7 +11,7 @@ file_name = sys.argv[1]
 full_path = os.path.join(path, file_name)
 f = open(full_path, 'r')
 
-chars='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~!@#$%^&*'
+chars='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 while True:
     line = f.readline().strip()
@@ -20,7 +20,7 @@ while True:
 
     flag = True
 
-    for length in range(1, 8):
+    for length in range(1, 7):
         plaintext_list = product(chars, repeat=length)
         for plaintext in plaintext_list:
             text = ''.join(plaintext)
