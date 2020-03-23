@@ -11,7 +11,7 @@ file_name = sys.argv[1]
 full_path = os.path.join(path, file_name)
 f = open(full_path, 'r')
 
-chars='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~!@#$%^&*'
+chars='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~!@#$%^&*'
 
 while True:
     line = f.readline().strip()
