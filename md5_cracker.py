@@ -11,16 +11,17 @@ file_name = sys.argv[1]
 full_path = os.path.join(path, file_name)
 f = open(full_path, 'r')
 
-chars = '123456abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+chars = '1234567890abcdefghijklmnopqrstuvwxyz'
 s = []
+cracked_num = 0
 
 while True:
-    line = f.readline()
+    line = f.readline().strip()
     if not line:
         break
     s.append(line)
 
-for length in range(1, 7):
+for length in range(6, 0, -1):
     plaintext_list = product(chars, repeat=length)
 
     for plaintext in plaintext_list:
@@ -28,11 +29,12 @@ for length in range(1, 7):
         # encode() : converts the string into bytes to be acceptable by hash function.
         hashed_text = hashlib.md5(text.encode('utf-8'))
         hashed_text = hashed_text.hexdigest()
-
+        # print(hashed_text)
         if hashed_text in s:
             print("Success! %d/%d, %s : %s"%(s.index(hashed_text)+1, len(s), text, hashed_text))
+            cracked_num += 1
 
-print("Cracking is over!")
+print("Cracking is over! %d has been cracked!"%(cracked_num))
 
 f.close()
 
