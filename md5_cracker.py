@@ -11,30 +11,28 @@ file_name = sys.argv[1]
 full_path = os.path.join(path, file_name)
 f = open(full_path, 'r')
 
-chars='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+chars = '123456'
+s = []
 
 while True:
-    line = f.readline().strip()
+    line = f.readline()
     if not line:
         break
+    s.append(line)
 
-    flag = True
+for length in range(6, 7):
+    plaintext_list = product(chars, repeat=length)
 
-    for length in range(1, 7):
-        plaintext_list = product(chars, repeat=length)
-        for plaintext in plaintext_list:
-            text = ''.join(plaintext)
-            # encode() : converts the string into bytes to be acceptable by hash function.
-            hashed_text = hashlib.md5(text.encode('utf-8'))
-            hashed_text = hashed_text.hexdigest()
+    for plaintext in plaintext_list:
+        text = ''.join(plaintext)
+        # encode() : converts the string into bytes to be acceptable by hash function.
+        hashed_text = hashlib.md5(text.encode('utf-8'))
+        hashed_text = hashed_text.hexdigest()
 
-            if hashed_text == line:
-                print("Success! %s is %s" %(text, line))
-                flag = False
+        if hashed_text in s:
+            print("Success! %d/%d, %s : %s"%(s.index(hashed_text)+1, len(s), text, hashed_text))
 
-    if flag:
-        print("Fail!", line)
-
+print("Cracking is over!")
 
 f.close()
 
