@@ -11,7 +11,7 @@ file_name = sys.argv[1]
 full_path = os.path.join(path, file_name)
 f = open(full_path, 'r')
 
-chars = '123456'
+chars = '123456abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 s = []
 
 while True:
@@ -20,7 +20,7 @@ while True:
         break
     s.append(line)
 
-for length in range(6, 7):
+for length in range(1, 7):
     plaintext_list = product(chars, repeat=length)
 
     for plaintext in plaintext_list:
